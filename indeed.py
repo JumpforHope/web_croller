@@ -17,7 +17,6 @@ def get_last_page():
 
     return max_page
 
-
 def extract_job(html):
     title = html.find("h2", {"class": "title"}).find("a")["title"]
     company = html.find("span", {"class": "company"})
@@ -38,7 +37,7 @@ def extract_job(html):
 def extract_jobs(last_page):
     jobs = []
     for page in range(last_page):
-        print(f"Scrapping page {page}")
+        print(f"Scrapping indeed: Page {page}")
         result = requests.get(f"{URL}&start={page*LIMIT}")
         soup = BeautifulSoup(result.text, "html.parser")
         results = soup.find_all("div", {"class": "jobsearch-SerpJobCard"})
