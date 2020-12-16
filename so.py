@@ -1,8 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 
-LIMIT = 50
-URL = f"https://stackoverflow.com/jobs"
+URL = f"https://stackoverflow.com/jobs?q=python"
+URL_For_Link = "https://stackoverflow.com/jobs"
 
 def get_last_page():
     result = requests.get(URL)
@@ -15,7 +15,7 @@ def extract_jobs(last_page):
     jobs = []
     for page in range(last_page):
         print(f"Scrapping SO: Page {page}")
-        result = requests.get(f"{URL}?pg={page +1}")
+        result = requests.get(f"{URL}&pg={page +1}")
         soup = BeautifulSoup(result.text, "html.parser")
         results = soup.find_all("div", {"class": "-job"})
         for result in results:
